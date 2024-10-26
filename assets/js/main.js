@@ -84,28 +84,51 @@ const sendEmail = (e) => {
     contactMessage.textContent = "Write all the input field.";
   } else {
     // serviceID - templateID - #form - publicKey
-    emailjs
-      .sendForm(
-        "service_lytd648",
-        "template_ttu95l1",
-        "#contact-form",
-        "-vMhhdP7IZv_7JpT3"
-      )
-      .then(
-        () => {
-          // Show message and add color
-          contactMessage.classList.add("color-blue");
-          contactMessage.textContent = "Message sent";
+    // emailjs
+    //   .sendForm(
+    //     "service_lytd648",
+    //     "template_ttu95l1",
+    //     "#contact-form",
+    //     "-vMhhdP7IZv_7JpT3"
+    //   )
+    //   .then(
+    //     () => {
+    //       // Show message and add color
+    //       contactMessage.classList.add("color-blue");
+    //       contactMessage.textContent = "Message sent";
 
-          // Remove message after five seconds
-          setTimeout(() => {
-            contactMessage.textContent = "";
-          }, 5000);
-        },
-        (error) => {
-          alert("OOOPS! SOMETHING HAS FAILED...", error);
-        }
-      );
+    //       // Remove message after five seconds
+    //       setTimeout(() => {
+    //         contactMessage.textContent = "";
+    //       }, 5000);
+    //     },
+    //     (error) => {
+    //       alert("OOOPS! SOMETHING HAS FAILED...", error);
+    //     }
+    //   );
+
+    Email.send({
+      SecureToken : "84a2578c-d1fe-42cf-9801-2dc0de43ad82",
+      To : 'manjursk209@gmail.com',
+      From : contactEmail.value,
+      Subject : `Contacted from Portfolio`,
+      Body : contactProject.value,
+    }).then(
+      // message => alert(message)
+      (message) => {
+        //       // Show message and add color
+              contactMessage.classList.add("color-blue");
+              contactMessage.textContent = "Message sent";
+    
+              // Remove message after five seconds
+              setTimeout(() => {
+                contactMessage.textContent = "";
+              }, 5000);
+            },
+            (error) => {
+              alert("OOOPS! SOMETHING WENT WRONG...");
+            }
+    );
 
     // To clear the input field
     contactName.value = "";
